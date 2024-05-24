@@ -1,0 +1,82 @@
+// Пины для управления реле
+const int relay1Pin = 2; // Пин для реле 1
+const int relay2Pin = 3; // Пин для реле 2
+const int relay3Pin = 4; // Пин для реле 3
+const int relay4Pin = 5; // Пин для реле 4
+
+void setup() {
+  
+  Serial.begin(9600);
+
+
+  pinMode(relay1Pin, OUTPUT);
+  pinMode(relay2Pin, OUTPUT);
+  pinMode(relay3Pin, OUTPUT);
+  pinMode(relay4Pin, OUTPUT);
+
+  turnOffAllDevices();
+}
+
+void loop() {
+  int userInput;
+
+
+  if (Serial.available() > 0) {
+    userInput = Serial.parseInt(); 
+    handleUserInput(userInput);
+  }
+}
+
+// Обработчик ввода пользователя
+void handleUserInput(int input) {
+  switch (input) {
+    case 1:
+      digitalWrite(relay1Pin, HIGH); 
+      break;
+    case 2:
+      digitalWrite(relay1Pin, LOW); 
+      break;
+    case 3:
+      digitalWrite(relay2Pin, HIGH);
+      break;
+    case 4:
+      digitalWrite(relay2Pin, LOW);
+      break;
+    case 5:
+      digitalWrite(relay3Pin, HIGH);
+      break;
+    case 6:
+      digitalWrite(relay3Pin, LOW);
+      break;
+    case 7:
+      digitalWrite(relay4Pin, HIGH);
+    case 8:
+      digitalWrite(relay4Pin, LOW);
+      break;
+    case 9:
+      turnOnAllDevices();
+      break;
+    case 10:
+      turnOffAllDevices();
+      break;
+    default:
+      
+      break;
+  }
+}
+
+
+void turnOnAllDevices() {
+  digitalWrite(relay1Pin, HIGH);
+  digitalWrite(relay2Pin, HIGH);
+  digitalWrite(relay3Pin, HIGH);
+  digitalWrite(relay4Pin, HIGH);
+}
+
+
+void turnOffAllDevices() {
+  digitalWrite(relay1Pin, LOW);
+  digitalWrite(relay2Pin, LOW);
+  digitalWrite(relay3Pin, LOW);
+  digitalWrite(relay4Pin, LOW);
+}
